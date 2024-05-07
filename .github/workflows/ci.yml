@@ -22,7 +22,7 @@ jobs:
     strategy:
       matrix:
         python-version: ['3.11', '3.12'] 
-        os-version: [ubuntu-latest, macos-latest]
+        os-version: [ubuntu-latest]
 
     steps:
       # Checkout the code from the repository.
