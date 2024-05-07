@@ -57,8 +57,12 @@ def replace_code_size(readme: str) -> None:
     lines_count = 0
     for root, _dirs, files in os.walk(SOURCE_CODE_DIR):
         for file in files:
+            if not file.endswith(".py"):
+                continue
+
             with open(Path(root) / file) as f:
                 filedata = f.read()
+
             symbols_count += len(filedata)
             lines_count += len(filedata.splitlines())
 
@@ -90,6 +94,7 @@ def make_backups(readme: str) -> None:
         for _ in Path().glob(f"{readme}.bak*"):
             bak_num += 1
         shutil.copy(readme, f"{readme}.bak{bak_num}")
+
 
 def main() -> None:
     """Make changes to README files."""
