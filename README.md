@@ -45,7 +45,7 @@ Mongodb database.
 # Installation
 
 ```bash
-pip install telethon-multimongo-session
+pip install git+https://github.com/devtolmachev/telethon-mongo-session
 ```
 
 # Examples

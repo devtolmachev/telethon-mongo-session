@@ -57,11 +57,12 @@ def replace_code_size(readme: str) -> None:
     lines_count = 0
     for root, _dirs, files in os.walk(SOURCE_CODE_DIR):
         for file in files:
-            if file.endswith(".pyc"):
+            if not file.endswith(".py"):
                 continue
 
             with open(Path(root) / file) as f:
                 filedata = f.read()
+
             symbols_count += len(filedata)
             lines_count += len(filedata.splitlines())
 
