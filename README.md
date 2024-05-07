@@ -11,8 +11,8 @@
 
 <h3 align="center">Codebase</h3>
 <p align="center">
-    <img src="https://img.shields.io/badge/Code_Lines-4-yellow" alt="Codelines">
-    <img src="https://img.shields.io/badge/Code_Symbols-102-yellow" alt="Codesymbols">
+    <img src="https://img.shields.io/badge/Code_Lines-482-yellow" alt="Codelines">
+    <img src="https://img.shields.io/badge/Code_Symbols-13614-yellow" alt="Codesymbols">
 
 </p>
 
@@ -68,7 +68,7 @@ client = th.TelegramClient(session, api_id=API_ID, api_hash=API_HASH)
 # Set dc for test servers
 dc_id = int(PHONE_NUMBER[5])
 # Get dc ip
-ip = TELEGRAM_DATA_CENTERS_IP[dc_id]
+ip = TELEGRAM_DATA_CENTERS_IP[dc_id] 
 # Set dc in session
 client.session.set_dc(dc_id, ip, 80)
 

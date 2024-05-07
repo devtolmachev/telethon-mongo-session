@@ -40,7 +40,7 @@ def telethon() -> th.TelegramClient:
     # Set dc for test servers
     dc_id = int(PHONE_NUMBER[5])
     # Get dc ip
-    ip = TELEGRAM_DATA_CENTERS_IP[dc_id]
+    ip = TELEGRAM_DATA_CENTERS_IP[str(dc_id)]
     # Set dc in session
     client.session.set_dc(dc_id, ip, 80)
     return client
