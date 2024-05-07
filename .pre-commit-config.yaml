@@ -1,0 +1,31 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.3.0
+    hooks:
+      - id: check-yaml
+
+  - repo: local
+    hooks:
+      - id: ruff
+        name: ruff
+        entry: ./scripts/run-if-main-branch.sh
+        language: script
+        types: [python]
+        pass_filenames: false
+      - id: pytest
+        name: pytest
+        entry: pytest
+        language: system
+        pass_filenames: false
+        args: [-svvl, --cov=telethon_multimongo_session/, --cov-report=xml, tests/]
+      - id: genbadge
+        name: upload coverage
+        entry: genbadge
+        language: system
+        pass_filenames: false
+        args: [coverage, -i, coverage.xml, -o, .github/badges/coverage.svg]
+      - id: README
+        name: replace README file
+        entry: python
+        language: system
+        args: [".github/badges/readme.py"]

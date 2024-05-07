@@ -1,0 +1,51 @@
+# This is a GitHub Actions workflow file that defines the check 
+# codestyle and tests for the pixelflow_core library.
+# It runs on every push and pull request to the main branch.
+
+name: CI/CD
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  tests:
+    runs-on: ${{ matrix.os-version }}
+    
+    strategy:
+      matrix:
+        python-version: ['3.11', '3.12'] 
+        os-version: [ubuntu-latest, macos-latest]
+
+    steps:
+      # Checkout the code from the repository.
+      - uses: actions/checkout@v4
+
+      # Set up the Python version for the job.
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      
+      # Install Poetry.
+      - uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: false
+          virtualenvs-in-project: false
+
+      # Install the dependencies for the project.
+      - name: Install dependencies
+        run: |
+          poetry lock --no-update
+          poetry install --no-root --no-interaction --no-ansi
+
+      # Lint the code with Ruff.
+      - name: Lint with Ruff
+        run: poetry run ruff check --output-format=github telethon_multimongo_session/
+        continue-on-error: false
+    
+      # Run the tests.
+      - name: Run pytest
+        run: poetry run pytest -svvl tests/
